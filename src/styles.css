@@ -1,1 +1,70 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, p, h1, h2, h3, h4, div {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans";
+    font-size: 10px;
+}
+
+html, body, app-root {
+    height: 100%
+}
+
+app-root {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    font-family: "Mochiy Pop P One";
+    font-size: 9px;
+}
+
+.submit-button{
+    height: 28px;
+    width: 100%;
+}
+
+/* overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+    html, body, p, h1, h2, h3, h4, div {
+        font-size: 11px;
+    }
+
+    .logo {
+        font-size: 10px;
+    }
+
+    .submit-button{
+        height: 33px;
+    }
+
+}
+
+@media (min-width: 992px) {
+    html, body, p, h1, h2, h3, h4, div {
+        font-size: 12px;
+    }
+
+    .logo {
+        font-size: 11px;
+    }
+
+    .submit-button{
+        height: 37px;
+    }
+    
+}

@@ -1,27 +1,35 @@
-# EventMarketplace
+# Event Marketplace SPA
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
+## Project Overview
 
-## Development server
+This project aims to develop a modern Angular application resembling an event marketplace, inspired by platforms like EventBrite. The goal is to create a seamless user experience and provide robust functionality for event organizers.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Functional Requirements
 
-## Code scaffolding
+#### User Experience
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Upcoming Events:** Display a list of upcoming events to users, keeping them informed about upcoming activities.
+- **Event Registration:** Allow users to easily sign up for events, making the registration process smooth and hassle-free.
+- **Lazy Loading:** Implement a lazy-loaded routing structure to enhance performance, ensuring that the application loads efficiently.
 
-## Build
+#### Event Organizer Dashboard
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Authentication:** Implement Firebase authentication to provide secure sign-up and login options for event organizers.
+- **Profile Management:** Enable organizers to manage their profiles, offering them the flexibility to update their information as needed.
+- **Event Management:** Empower organizers with the ability to perform CRUD operations on events, giving them control over event creation, editing, and deletion. Additionally, provide them with insights by allowing them to view attendee lists for each event.
 
-## Running unit tests
+### Technologies Used
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### Frontend
 
-## Running end-to-end tests
+- Angular
+- Tailwind CSS
+- Firebase
+- RxJS
+- Angular Signals
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+#### Backend
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Firebase Authenticatiom
+- Firebase Realtime Database
+- Firebase Storage

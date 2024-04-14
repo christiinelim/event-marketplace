@@ -1,0 +1,171 @@
+<div>
+    <app-navbar></app-navbar>
+
+    <div class="wrapper">
+        <div class="flex justify-center font-bold header">List New Event</div>
+        <form [formGroup]="addListingForm" (ngSubmit)="onSubmit(addListingForm.value)" class="max-w-lg mx-auto mt-8">
+            <div class="mb-8">
+                <label class="block text-sm font-bold mb-2">Event Name:</label>
+                <input type="text" id="eventName" formControlName="eventName" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                @if(addListingForm.get('eventName')?.invalid && addListingForm.get('eventName')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(addListingForm.get('eventName')?.hasError('required')){
+                            <div>Event name is required</div>
+                        }
+                    </div>
+                }
+            </div>
+          
+            <div class="mb-8">
+                <label class="block text-sm font-bold mb-2">Category:</label>
+                <select id="category" formControlName="category" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                    <option value="">Select Category</option>
+                    <option value="music">Music</option>
+                    <option value="nightlife">Nightlife</option>
+                    <option value="performance">Performance and Visual Art</option>
+                    <option value="holidays">Holidays</option>
+                    <option value="health">Health</option>
+                    <option value="hobbies">Hobbies</option>
+                    <option value="business">Business</option>
+                </select>
+                @if(addListingForm.get('category')?.invalid && addListingForm.get('category')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(addListingForm.get('category')?.hasError('required')){
+                            <div>Please select a category</div>
+                        }
+                    </div>
+                }
+            </div>
+
+            <div class="mb-8">
+                <label class="block text-sm font-bold mb-2">Upload Image:</label>
+                <input type="file" id="image" formControlName="image" (change)="onFileSelected($event)" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                @if(addListingForm.get('image')?.invalid && addListingForm.get('image')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(addListingForm.get('image')?.hasError('required')){
+                            <div>Please upload an image</div>
+                        }
+                    </div>
+                }
+            </div>
+            
+
+            <div class="mb-8">
+                <label class="block text-sm font-bold mb-2">Number of Attendees Allowed:</label>
+                <input type="number" id="attendeesAllowed" formControlName="attendeesAllowed" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                @if(addListingForm.get('attendeesAllowed')?.invalid && addListingForm.get('attendeesAllowed')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(addListingForm.get('attendeesAllowed')?.hasError('required')){
+                            <div>Maximum no of attendees is required</div>
+                        }
+                    </div>
+                }
+            </div>
+          
+            <div class="mb-8">
+                <label class="block text-sm font-bold mb-2">Cost:</label>
+                <input type="number" id="cost" formControlName="cost" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                @if(addListingForm.get('cost')?.invalid && addListingForm.get('cost')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(addListingForm.get('cost')?.hasError('required')){
+                            <div>Cost is required</div>
+                        }
+                    </div>
+                }
+            </div>
+
+            <div class="mb-8">
+                <label class="block text-sm font-bold mb-2">Date:</label>
+                <input type="date" id="date" formControlName="date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                @if(addListingForm.get('date')?.invalid && addListingForm.get('date')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(addListingForm.get('date')?.hasError('required')){
+                            <div>Date is required</div>
+                        }
+                    </div>
+                }
+            </div>
+
+            <div class="mb-8 flex">
+                <div class="w-1/2 mr-2">
+                    <label class="block text-sm font-bold mb-2">Start Time:</label>
+                    <input type="time" id="starttime" formControlName="starttime" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                    @if(addListingForm.get('starttime')?.invalid && addListingForm.get('starttime')?.dirty){
+                        <div class="text-red-500 text-sm mt-1">
+                            @if(addListingForm.get('starttime')?.hasError('required')){
+                                <div>Time is required</div>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="w-1/2 ml-2">
+                    <label class="block text-sm font-bold mb-2">End Time:</label>
+                    <input type="time" id="endtime" formControlName="endtime" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                    @if(addListingForm.get('endtime')?.invalid && addListingForm.get('endtime')?.dirty){
+                        <div class="text-red-500 text-sm mt-1">
+                            @if(addListingForm.get('endtime')?.hasError('required')){
+                                <div>Time is required</div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>            
+                
+            <div class="mb-8">
+                <label class="block text-sm font-bold mb-2">Location:</label>
+                <input type="text" id="location" formControlName="location" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                @if(addListingForm.get('location')?.invalid && addListingForm.get('location')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(addListingForm.get('location')?.hasError('required')){
+                            <div>Location is required</div>
+                        }
+                    </div>
+                }
+            </div>
+                
+            <div class="mb-8">
+                <label class="block text-sm font-bold mb-2">Refund Policy:</label>
+                <textarea type="text" id="refundPolicy" formControlName="refundPolicy" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"></textarea>
+                @if(addListingForm.get('refundPolicy')?.invalid && addListingForm.get('refundPolicy')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(addListingForm.get('refundPolicy')?.hasError('required')){
+                            <div>Refund policy is required</div>
+                        }
+                    </div>
+                }
+            </div>
+                
+            <div class="mb-8">
+                <label class="block text-sm font-bold mb-2">Synopsis:</label>
+                <textarea id="synopsis" formControlName="synopsis" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"></textarea>  
+                @if(addListingForm.get('synopsis')?.invalid && addListingForm.get('synopsis')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(addListingForm.get('synopsis')?.hasError('required')){
+                            <div>Synopsis is required</div>
+                        }
+                    </div>
+                }
+            </div>
+                
+            <div class="mb-8">
+                <label class="block text-sm font-bold mb-2">Detailed Description:</label>
+                <textarea id="description" formControlName="description" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"></textarea>
+                @if(addListingForm.get('description')?.invalid && addListingForm.get('description')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(addListingForm.get('description')?.hasError('required')){
+                            <div>Detailed description is required</div>
+                        }
+                    </div>
+                }
+            </div>       
+          
+            <div class="flex justify-center">
+                <button type="submit" [disabled]="!addListingForm.valid" 
+                    class="bg-blue-800 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-md 
+                    {{ !addListingForm.valid ? 'bg-gray-400 cursor-not-allowed' : '' }}">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

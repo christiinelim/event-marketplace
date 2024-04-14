@@ -1,0 +1,113 @@
+<div class="min-h-screen flex justify-center items-center signup-bg">
+    <div class="overlay"></div>
+    <div class="bg-white p-8 rounded-lg shadow-md signup-form">
+        <div class="flex flex-col items-center">
+            <div class="text-blue-800 mb-6 logo">Event Marketplace</div>
+            <div class="mb-6 font-bold signup-cta">Sign Up to Start Listing</div>
+        </div>
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm.value)">
+            <div class="mb-6">
+                <label class="block mb-1">Email</label>
+                <input type="email" id="email" formControlName="email" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
+                @if(signupForm.get('email')?.invalid && signupForm.get('email')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(signupForm.get('email')?.hasError('required')){
+                            <div>Email is required</div>
+                        }
+
+                        @if(signupForm.get('email')?.hasError('email')){
+                            <div>Invalid format</div>
+                        }
+                    </div>
+                }
+            </div>
+            <div class="flex mb-6">
+                <div class="flex-1 mr-2">
+                    <label class="block mb-1">Password</label>
+                    <input type="password" id="password" formControlName="password" (keyup)="checkConfirmPassword()" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
+                    @if(signupForm.get('password')?.invalid && signupForm.get('password')?.dirty){
+                        <div class="text-red-500 text-sm mt-1">
+                            @if(signupForm.get('password')?.hasError('required')){
+                                <div>Password is required</div>
+                            }
+    
+                            @if(signupForm.get('password')?.hasError('invalidPassword')){
+                                <div>Password needs at least 1 uppercase, 1 lowercase and 1 special character with a minimum of 8 characters</div>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="flex-1 ml-2">
+                    <label class="block mb-1">Confirm Password</label>
+                    <input type="password" id="confirmPassword" formControlName="confirmPassword" (keyup)="checkConfirmPassword()" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
+                    @if((signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.dirty) || (confirmPasswordInvalid === true)){
+                        <div class="text-red-500 text-sm mt-1">
+                            @if(signupForm.get('confirmPassword')?.hasError('required')){
+                                <div>Input is required</div>
+                            }
+    
+                            @if(confirmPasswordInvalid){
+                                <div>Passwords do not match</div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>            
+            <div class="mb-6">
+                <label class="block mb-1">Organization Name</label>
+                <input type="text" id="username" formControlName="username" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
+                @if(signupForm.get('username')?.invalid && signupForm.get('username')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(signupForm.get('username')?.hasError('required')){
+                            <div>Organization is required</div>
+                        }
+                    </div>
+                }
+            </div>
+            <div class="mb-6">
+                <label class="block mb-1">Website</label>
+                <input type="text" id="website" formControlName="website" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
+                @if(signupForm.get('website')?.invalid && signupForm.get('website')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(signupForm.get('website')?.hasError('required')){
+                            <div>Website URL is required</div>
+                        }
+
+                        @if(signupForm.get('website')?.hasError('invalidWebsite')){
+                            <div>Invalid website format, it must start with http://, https:// or www.</div>
+                        }
+                    </div>
+                }
+            </div>
+            <div class="mb-8">
+                <label class="block mb-1">Contact Number</label>
+                <input type="string" id="contact" formControlName="contact" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
+                @if(signupForm.get('contact')?.invalid && signupForm.get('contact')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(signupForm.get('contact')?.hasError('required')){
+                            <div>Contact is required</div>
+                        }
+
+                        @if(signupForm.get('contact')?.hasError('invalidContact')){
+                            <div>Invalid format, it must start with '6', '8' or '9' and must only contain 8 numbers</div>
+                        }
+                    </div>
+                }
+            </div>
+            <div class="flex justify-center">
+                <button type="submit" [disabled]="!signupForm.valid" 
+                    class="bg-blue-800 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-md 
+                    {{ !signupForm.valid ? 'bg-gray-400 cursor-not-allowed' : '' }}">
+                    Sign Up
+                </button>
+            </div>
+        </form>
+        <div class="text-center mt-4">
+            <p>
+                Already have an account?  
+                <span class="text-blue-800 hover:text-blue-500 cursor-pointer font-bold" (click)="navigateToLogin()">Login</span>
+            </p>
+        </div>
+    </div>
+  </div>
+  

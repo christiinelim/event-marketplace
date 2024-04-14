@@ -1,0 +1,15 @@
+.wrapper {
+    margin: 20px 30px;
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        margin: 30px 70px;
+    }
+}
+
+@media (min-width: 992px) {
+    .wrapper {
+        margin: 40px 100px;
+    }
+}
