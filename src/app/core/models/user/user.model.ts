@@ -1,4 +1,6 @@
 export interface User {
-    email: string;
-    username: string;
-}
+    uid: string;
+    displayName: string | null;
+    email: string | null;
+    username?: string | null;
+  }

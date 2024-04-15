@@ -28,4 +28,8 @@ export class NavbarComponent {
   navigateToDashboard() {
     this.router.navigateByUrl('/dashboard');
   }
+
+  navigateToProfile() {
+    this.router.navigateByUrl('/profile');
+  }
 }

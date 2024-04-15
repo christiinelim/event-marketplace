@@ -39,7 +39,6 @@ export class EventsService {
   }
 
   getEventsByEventUid(eventUid: string): Observable<Event> {
-  
     const q = query(this.eventsCollection, where("__name__", "==", eventUid));
 
     return new Observable<Event>((observer) => {

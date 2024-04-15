@@ -17,14 +17,19 @@ export class DashboardComponent implements OnInit {
   router = inject(Router);
   eventsService = inject(EventsService);
   events: Event[] = []; 
+  activeEvents: Event[] = []; 
+  pastEvents: Event[] = []; 
 
   showOverlay: boolean = false;
   eventName: string = "";
   eventId: any = "";
+  activeTab: string = "active";
 
   ngOnInit(): void {
     this.eventsService.getEventsByUid().subscribe((response) => {
-      this.events = response;
+      this.pastEvents = response.filter(event => new Date(event.date) < new Date());
+      this.activeEvents = response.filter(event => new Date(event.date) >= new Date());
+      this.events = this.activeEvents;
     });
   }
 
@@ -52,5 +57,15 @@ export class DashboardComponent implements OnInit {
       this.eventName = "";
       this.eventId = "";
     });
+  }
+
+  setEvents(type: string) {
+    if (type === "active") {
+      this.events = this.activeEvents;
+      this.activeTab = "active";
+    } else {
+      this.events = this.pastEvents;
+      this.activeTab = "past";
+    }
   }
 }

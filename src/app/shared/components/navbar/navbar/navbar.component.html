@@ -16,8 +16,8 @@
             </button>
             @if (isProfileOpen) {
                 <div class="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-md">
-                    <a class="block px-4 py-2 text-gray-800 hover:bg-gray-200 cursor-pointer" routerLink="/profile">Profile</a>
-                    <button class="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-left" (click)="onLogout()">Logout</button>
+                    <button class="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-center" (click)="navigateToProfile()">Profile</button>
+                    <button class="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-center" (click)="onLogout()">Logout</button>
                 </div>
             }
         </div>
