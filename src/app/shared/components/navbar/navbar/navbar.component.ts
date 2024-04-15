@@ -21,12 +21,8 @@ export class NavbarComponent {
   }
 
   onLogout(): void {
-    this.authService.logout().subscribe(() => {
-        this.router.navigateByUrl('/login');
-      }, (error) => {
-        console.error('Logout error:', error);
-      }
-    );
+    this.authService.logout();
+    this.router.navigateByUrl('/login');
   }
 
   navigateToDashboard() {

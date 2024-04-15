@@ -2,7 +2,7 @@
     <app-navbar></app-navbar>
 
     <div class="wrapper">
-        <div class="flex justify-center font-bold header">List New Event</div>
+        <div class="flex justify-center font-bold header">{{header}}</div>
         <form [formGroup]="addListingForm" (ngSubmit)="onSubmit(addListingForm.value)" class="max-w-lg mx-auto mt-8">
             <div class="mb-8">
                 <label class="block text-sm font-bold mb-2">Event Name:</label>
@@ -39,7 +39,7 @@
 
             <div class="mb-8">
                 <label class="block text-sm font-bold mb-2">Upload Image:</label>
-                <input type="file" id="image" formControlName="image" (change)="onFileSelected($event)" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                <input type="file" id="image" formControlName="image" (change)="onFileUpload($event)" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
                 @if(addListingForm.get('image')?.invalid && addListingForm.get('image')?.dirty){
                     <div class="text-red-500 text-sm mt-1">
                         @if(addListingForm.get('image')?.hasError('required')){
@@ -160,10 +160,13 @@
             </div>       
           
             <div class="flex justify-center">
+                <button type="button" class="bg-gray-300 hover:bg-gray-400 text-white font-semibold px-4 py-2 rounded-md mr-2" (click)="navigateToDashboard()">
+                    Cancel
+                </button>
                 <button type="submit" [disabled]="!addListingForm.valid" 
                     class="bg-blue-800 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-md 
                     {{ !addListingForm.valid ? 'bg-gray-400 cursor-not-allowed' : '' }}">
-                    Submit
+                    {{mode}}
                 </button>
             </div>
         </form>

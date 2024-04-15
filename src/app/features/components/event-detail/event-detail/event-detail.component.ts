@@ -1,30 +1,35 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { NavbarComponent } from '../../../../shared/components/navbar/navbar/navbar.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventsService } from '../../../../core/services/events/events.service';
 import { Event } from '../../../../core/models/event/event.model';
-import { FeaturesModule } from '../../../features.module';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-event-detail',
   standalone: true,
-  imports: [NavbarComponent, FeaturesModule],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  imports: [NavbarComponent],
+  templateUrl: './event-detail.component.html',
+  styleUrl: './event-detail.component.css'
 })
 
-export class DashboardComponent implements OnInit {
+export class EventDetailComponent implements OnInit {
   router = inject(Router);
+  route = inject(ActivatedRoute);
   eventsService = inject(EventsService);
-  events: Event[] = []; 
+  event: Event | null = null;
 
   showOverlay: boolean = false;
-  eventName: string = "";
+  eventName: any = "";
   eventId: any = "";
 
   ngOnInit(): void {
-    this.eventsService.getEventsByUid().subscribe((response) => {
-      this.events = response;
+    let eventId = "";
+    this.route.params.subscribe(params => {
+      eventId = params['id'];
+    });
+
+    this.eventsService.getEventsByEventUid(eventId).subscribe((response) => {
+      this.event = response;
     });
   }
 
@@ -36,11 +41,11 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl(`/update/${eventId}`, { state: { mode: "Update", header: "Update Event" } })
   }
 
-  navigateToEventDetails(eventId?: string) {
-    this.router.navigateByUrl(`/event/${eventId}`);
+  navigateToDashboard() {
+    this.router.navigateByUrl("/dashboard");
   }
 
-  onDelete(eventName: string, eventId?: string) {
+  onDelete(eventName?: string, eventId?: string) {
     this.showOverlay = true;
     this.eventName = eventName;
     this.eventId = eventId;

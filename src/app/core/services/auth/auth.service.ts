@@ -3,14 +3,16 @@ import { Auth, UserCredential, createUserWithEmailAndPassword, updateProfile, us
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { Observable, from, map } from 'rxjs';
 import { User } from '../../models/user/user.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   firebaseAuth = inject(Auth);
+  cookieService = inject(CookieService);
   user$ = user(this.firebaseAuth);
-  currentUserSignal = signal<User | null | undefined>(undefined)
+  currentUserSignal = signal<User | null | undefined>(undefined);
 
   
   signup(email: string, password: string, username: string): Observable<string> {
@@ -25,12 +27,22 @@ export class AuthService {
 
   login(email: string, password: string): Observable<void> {
     const promise = signInWithEmailAndPassword(this.firebaseAuth, email, password)
-      .then(() => {});
+      .then((userCredential) => {
+        const user = userCredential.user;
+        if (user) {
+          this.cookieService.set('userId', user.uid);
+        } else {
+          throw new Error('User not found');
+        }
+      })
+      .catch((error) => {
+        console.error('Login error:', error);
+        throw error;
+      })
       return from(promise);
   }
 
-  logout(): Observable<void> {
-    const promise = signOut(this.firebaseAuth);
-    return from(promise);
+  logout(): void {
+    this.cookieService.delete('userId');
   }
 }

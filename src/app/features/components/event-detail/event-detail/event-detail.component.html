@@ -1,0 +1,78 @@
+<div>
+  <app-navbar></app-navbar>
+
+  <!-- action nav -->
+  <div class="fixed top-1/2 transform -translate-y-1/2 right-10 w-12 h-40 bg-white rounded-lg shadow-lg flex flex-col justify-center items-center z-50 border border-gray-100 gap-6">
+    <div (click)="navigateToUpdateListing(event?.uid)">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 hover:text-gray-500 cursor-pointer" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+      </svg>
+    </div>
+    <div (click)="onDelete(event?.eventName, event?.uid)">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400 hover:text-red-500 cursor-pointer" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+      </svg>
+    </div>
+    <div (click)="navigateToDashboard()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-400 hover:text-blue-500 cursor-pointer" fill="currentColor" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
+        <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+      </svg>
+    </div>
+  </div>
+
+  @if(showOverlay) {
+    <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
+      <div class="bg-white rounded-lg shadow-lg p-6 max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
+        <p class="text-lg md:text-xl mb-4 mt-5">Are you sure you want to delete the event?</p>
+        <p class="text-center font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl mb-10">{{ eventName }}</p>
+        <div class="flex justify-center mb-5">
+          <button class="px-4 py-2 bg-red-500 text-white rounded-md mr-4 hover:bg-red-600" type="button" (click)="confirmDelete()">Confirm</button>
+          <button class="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500" type="button" (click)="showOverlay = false">Cancel</button>
+        </div>
+      </div>
+    </div>          
+  }
+  
+  <div class="container mx-auto py-8">
+    <img src="{{ event?.image }}" alt="{{ event?.eventName }}" class="w-full h-80 md:h-150 object-cover object-center mb-14">
+    
+    <div class="wrapper">
+      <h1 class="header font-bold">{{ event?.eventName }}</h1>
+    
+      <div class="grid gap-6">
+        <div class="col-span-6">
+          <h2 class="subheading font-bold mb-2">Location</h2>
+          <p class="text-gray-600 mb-14">{{ event?.location }}</p>
+  
+          <h2 class="subheading font-bold mb-2">Date</h2>
+          <p class="text-gray-600 mb-14">{{ event?.date }}</p>
+  
+          <h2 class="subheading font-bold mb-2">Time</h2>
+          <p class="text-gray-600">{{ event?.starttime }} to {{ event?.endtime }}</p>
+        </div>
+        <div class="col-span-6">
+          <h2 class="subheading font-bold mb-2">Category</h2>
+          <p class="text-gray-600 mb-14 capitalize">{{ event?.category }}</p>
+  
+          <h2 class="subheading font-bold mb-2">Cost</h2>
+          <p class="text-gray-600 mb-14">{{ event?.cost }}</p>
+  
+          <h2 class="subheading font-bold mb-2">Slots Left</h2>
+          <p class="text-gray-600">{{ event?.attendeesAllowed }}</p>
+        </div>
+        <div class="col-span-12">
+          <h2 class="subheading font-bold mb-2">Description</h2>
+          <p class="text-gray-600 mb-14">{{ event?.description }}</p>
+  
+          <h2 class="subheading font-bold mb-2">Synopsis</h2>
+          <p class="text-gray-600 mb-14">{{ event?.synopsis }}</p>
+  
+          <h2 class="subheading font-bold mb-2">Refund Policy</h2>
+          <p class="text-gray-600 mb-14">{{ event?.refundPolicy }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

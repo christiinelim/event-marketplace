@@ -16,8 +16,18 @@ export const routes: Routes = [
         loadComponent: () => import('./features/components/dashboard/dashboard/dashboard.component').then(m => m.DashboardComponent)
     },
     {
-        path: 'listing',
+        path: 'update/:id',
         canActivate: [authGuard],
-        loadComponent: () => import('./features/components/add-listing/add-listing/add-listing.component').then(m => m.AddListingComponent)
+        loadComponent: () => import('./features/components/listing-form/listing-form/listing-form.component').then(m => m.AddListingComponent)
+    },
+    {
+        path: 'add',
+        canActivate: [authGuard],
+        loadComponent: () => import('./features/components/listing-form/listing-form/listing-form.component').then(m => m.AddListingComponent)
+    },
+    {
+        path: 'event/:id',
+        canActivate: [authGuard],
+        loadComponent: () => import('./features/components/event-detail/event-detail/event-detail.component').then(m => m.EventDetailComponent)
     }
 ];
