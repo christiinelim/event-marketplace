@@ -16,16 +16,49 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   eventsService = inject(EventsService);
   router = inject(Router);
-  activeEvents: Event[] = [];
+
+  selectedEvents: Event[] = [];
+  allEvents: Event[] = [];
+  musicEvents: Event[] = [];
+  nightlifeEvents: Event[] = [];
+  performanceEvents: Event[] = [];
+  holidaysEvents: Event[] = [];
+  hobbiesEvents: Event[] = [];
+  selected: string = "all";
+  
+  categoryMap: { [key: string]: Event[] } = {
+    'music': this.musicEvents,
+    'nightlife': this.nightlifeEvents,
+    'performance': this.performanceEvents,
+    'holidays': this.holidaysEvents,
+    'hobbies': this.hobbiesEvents
+  };
 
   ngOnInit(): void {
     this.eventsService.getEvents().subscribe((response) => {
-      this.activeEvents = response.filter(event => new Date(event.date) >= new Date());
-      console.log(this.activeEvents)
+      this.selectedEvents = response.filter(event => new Date(event.date) >= new Date());
+      this.allEvents = this.selectedEvents;
+      console.log(this.selectedEvents);
+  
+      this.selectedEvents.forEach(event => {
+        const category = event.category;
+        if (category in this.categoryMap) {
+          this.categoryMap[category].push(event);
+        }
+      });
     });
   }
-
+  
   navigateToEventDetails(eventId?: string) {
     this.router.navigateByUrl(`/view-event/${eventId}`);
+  }
+
+  filterEvents(category: string) {
+    if (category === "all") {
+      this.selectedEvents = this.allEvents;
+    } else {
+      this.selected = category;
+      this.selectedEvents = this.categoryMap[category];
+    }
   }
 }

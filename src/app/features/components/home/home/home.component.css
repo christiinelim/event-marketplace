@@ -2,6 +2,24 @@
     margin: 20px 30px;
 }
 
+.category-filter {
+    margin-right: 10px;
+}
+
+/* scrollbar */
+.categories {
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.categories::-webkit-scrollbar {
+    width: 0;
+}
+
+.categories:hover::-webkit-scrollbar {
+    width: thin;
+}
+
 @media (min-width: 768px) {
     .wrapper {
         margin: 30px 70px;

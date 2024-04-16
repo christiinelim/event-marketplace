@@ -1,11 +1,17 @@
 <div>
     <app-navbar-landing></app-navbar-landing>
+
+    @if (displayForm){
+        <app-signup-form (cancelClicked)="onCancelClicked()"></app-signup-form>
+    }
   
-    <div class="fixed top-1/2 transform -translate-y-1/2 right-20 sm:w-80 w-60 h-40 bg-white rounded-lg flex flex-col justify-center items-center z-50 border border-gray-200 gap-6">
+    <div class="fixed top-1/2 transform -translate-y-1/2 right-20 sm:w-80 w-60 h-40 bg-white rounded-lg flex flex-col justify-center items-center z-20 border border-gray-200 gap-6">
         <div class="flex flex-col items-center">
             <span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-600 mb-8">{{ event?.cost === 0 ? 'Free' : '$' + event?.cost }}</span>
             <div class="w-40 sm:w-60 h-12 bg-red-500 text-white flex justify-center items-center rounded-md cursor-pointer hover:bg-red-600">
-                <button [disabled]="event?.attendeesAllowed === 0" class="w-full h-full" (click)="onSignUp()">Sign Up</button>
+                <button [disabled]="event?.attendeesAllowed === 0" class="w-full h-full" [class.bg-gray-400]="event?.attendeesAllowed === 0" (click)="onSignUp()">
+                  {{ event?.attendeesAllowed === 0 ? 'Filled' : 'Sign Up' }}
+                </button>
             </div>
         </div>
     </div>    

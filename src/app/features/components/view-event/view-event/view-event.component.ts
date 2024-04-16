@@ -3,18 +3,21 @@ import { NavbarLandingComponent } from '../../../../shared/components/navbar-lan
 import { EventsService } from '../../../../core/services/events/events.service';
 import { Event } from '../../../../core/models/event/event.model';
 import { ActivatedRoute } from '@angular/router';
+import { SignupFormComponent } from '../../signup-form/signup-form/signup-form.component';
 
 @Component({
   selector: 'app-view-event',
   standalone: true,
-  imports: [NavbarLandingComponent],
+  imports: [NavbarLandingComponent, SignupFormComponent],
   templateUrl: './view-event.component.html',
   styleUrl: './view-event.component.css'
 })
 export class ViewEventComponent implements OnInit {
   eventsService = inject(EventsService);
   route = inject(ActivatedRoute);
+
   event: Event | null = null;
+  displayForm: boolean = false;
 
   ngOnInit(): void {
     let eventId = "";
@@ -28,6 +31,10 @@ export class ViewEventComponent implements OnInit {
   }
 
   onSignUp() {
-    
+    this.displayForm = true;
+  }
+
+  onCancelClicked() {
+    this.displayForm = false;
   }
 }

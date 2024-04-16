@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { EventsService } from '../../../../core/services/events/events.service';
 import { Event } from '../../../../core/models/event/event.model';
 import { FeaturesModule } from '../../../features.module';
+import { DeleteConfirmationComponent } from '../../delete-confirmation/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NavbarComponent, FeaturesModule],
+  imports: [NavbarComponent, FeaturesModule, DeleteConfirmationComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -45,18 +46,27 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl(`/event/${eventId}`);
   }
 
+  navigateToDashboard() {
+    this.router.navigateByUrl("/dashboard");
+  }
+
   onDelete(eventName: string, eventId?: string) {
     this.showOverlay = true;
     this.eventName = eventName;
     this.eventId = eventId;
   }
 
-  confirmDelete() {
-    this.eventsService.deleteEvent(this.eventId).subscribe(() => {
+  async deleteClicked() {
+    await this.eventsService.deleteEvent(this.eventId).subscribe(() => {
       this.showOverlay = false;
       this.eventName = "";
       this.eventId = "";
     });
+    this.navigateToDashboard();
+  }
+
+  cancelClicked() {
+    this.showOverlay = false;
   }
 
   setEvents(type: string) {

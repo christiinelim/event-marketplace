@@ -3,11 +3,12 @@ import { NavbarComponent } from '../../../../shared/components/navbar/navbar/nav
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventsService } from '../../../../core/services/events/events.service';
 import { Event } from '../../../../core/models/event/event.model';
+import { DeleteConfirmationComponent } from '../../delete-confirmation/delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-event-detail',
   standalone: true,
-  imports: [NavbarComponent],
+  imports: [NavbarComponent, DeleteConfirmationComponent],
   templateUrl: './event-detail.component.html',
   styleUrl: './event-detail.component.css'
 })
@@ -51,11 +52,16 @@ export class EventDetailComponent implements OnInit {
     this.eventId = eventId;
   }
 
-  confirmDelete() {
-    this.eventsService.deleteEvent(this.eventId).subscribe(() => {
+  async deleteClicked() {
+    await this.eventsService.deleteEvent(this.eventId).subscribe(() => {
       this.showOverlay = false;
       this.eventName = "";
       this.eventId = "";
     });
+    this.navigateToDashboard();
+  }
+
+  cancelClicked() {
+    this.showOverlay = false;
   }
 }
