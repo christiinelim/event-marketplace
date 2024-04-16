@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   searchedEvents: any[] = [];
   selected: string = "all";
   searchTerm: string = "";
+  selectedFilter: string = "ascending";
   showPopup: boolean = false;
   showClearSearch: boolean = false;
   
@@ -63,16 +64,6 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl(`/view-event/${eventId}`);
   }
 
-  filterEvents(category: string) {
-    if (category === "all") {
-      this.selected = category;
-      this.selectedEvents = this.allEvents;
-    } else {
-      this.selected = category;
-      this.selectedEvents = this.categoryMap[category];
-    }
-  }
-
   hidePopup() {
     this.showPopup = false;
   }
@@ -99,5 +90,28 @@ export class HomeComponent implements OnInit {
     this.showClearSearch = false;
     this.selectedEvents = this.allEvents;
     this.searchTerm = "";
+  }
+
+  // filter
+  filterEvents(category: string) {
+    if (category === "all") {
+      this.selected = category;
+      this.selectedEvents = this.allEvents;
+    } else {
+      this.selected = category;
+      this.selectedEvents = this.categoryMap[category];
+    }
+  }
+
+  applyFilter() {
+    if (this.selectedFilter === "ascending") {
+      this.selectedEvents.sort((a, b) => (a.date > b.date ? 1 : -1)); 
+    } else if (this.selectedFilter === "descending") {
+      this.selectedEvents.sort((a, b) => (a.date < b.date ? 1 : -1));
+    } else if (this.selectedFilter === "free") {
+      this.selectedEvents = this.selectedEvents.filter(event => event.cost === 0)
+    } else {
+      this.selectedEvents = this.selectedEvents.filter(event => event.attendeesAllowed > 0);
+    }
   }
 }

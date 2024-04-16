@@ -2,34 +2,72 @@
 
 ## Project Overview
 
-This project aims to develop a modern Angular application resembling an event marketplace, inspired by platforms like EventBrite. The goal is to create a seamless user experience and provide robust functionality for event organizers.
+This project aims to develop an event marketplace where organizers can share their upcoming events and users can register for it. The platform is designed to facilitate seamless interaction between event organizers and attendees. It offers a range of features aimed at enhancing the user experience and streamlining event management for organizers.
 
-### Functional Requirements
+## Software Requirements Specifications 
+This section describes the requirements for the software project. The created software must be
+able to perform the following functional requirements (abbreviated as FR):
 
-#### User Experience
+**FR 1: User Experience**
+- FR 1.1: User can view the list of upcoming events with key details.
+- FR 1.2: User can sign up for events.
+- FR 1.3: User can filter for events based on preference.
 
-- **Upcoming Events:** Display a list of upcoming events to users, keeping them informed about upcoming activities.
-- **Event Registration:** Allow users to easily sign up for events, making the registration process smooth and hassle-free.
-- **Lazy Loading:** Implement a lazy-loaded routing structure to enhance performance, ensuring that the application loads efficiently.
 
-#### Event Organizer Dashboard
+**FR 2: Event Organizer Dashboard**
+- FR 1.1: Event Organizer can view the list of active and past events they have listed.
+- FR 1.2: Event Organizer can add new event listing, update old listing or delete listings.
+- FR 1.3: Event Organizer can view the list of users who have signed up for a specific event.
 
-- **Authentication:** Implement Firebase authentication to provide secure sign-up and login options for event organizers.
-- **Profile Management:** Enable organizers to manage their profiles, offering them the flexibility to update their information as needed.
-- **Event Management:** Empower organizers with the ability to perform CRUD operations on events, giving them control over event creation, editing, and deletion. Additionally, provide them with insights by allowing them to view attendee lists for each event.
+## Prototype
 
-### Technologies Used
+**Homepage**
+![Homepage](./src/assets/images/readme/landing-page.png)
 
-#### Frontend
+**View Event Page**
+![View Event](./src/assets/images/readme/view-event-page.png)
+
+**Sign Up Form**
+![Sign Up Form](./src/assets/images/readme/signup-form.png)
+
+**Event Organizer Sign Up**
+![Sign Up for Account](./src/assets/images/readme/signup.png)
+
+**Event Organizer Login**
+![Login to Account](./src/assets/images/readme/login.png)
+
+**Dashboard**
+![Dashboard](./src/assets/images/readme/dashboard.png)
+
+**List New Event**
+![List New Event](./src/assets/images/readme/list-event.png)
+
+**View Listed Event**
+![View Listed Event](./src/assets/images/readme/view-event.png)
+
+**View Sign Up List**
+![Sign Up List](./src/assets/images/readme/signup-list.png)
+
+**Delete Confirmation**
+![Delete Confirmation](./src/assets/images/readme/delete-confirmation.png)
+
+## Technologies Used
 
 - Angular
 - Tailwind CSS
 - Firebase
-- RxJS
-- Angular Signals
+- TypeScript
 
-#### Backend
+## Future Implementations
 
-- Firebase Authenticatiom
-- Firebase Realtime Database
-- Firebase Storage
+### 1. Profile Updating
+Enable organizers to update their profile information as needed, allowing for flexibility and keeping their information current.
+
+### 2. Two-Factor Authentication (2FA)
+Enhance security measures by implementing Two-Factor Authentication (2FA) to protect user accounts. Organizers will be required to verify their email address and a second factor, such as a mobile device, before gaining access to the system, adding an extra layer of security.
+
+### 3. Stripe Payment Integration
+Integrate Stripe payment gateway to facilitate secure and seamless transactions for event registrations and payments. This will provide users with multiple payment options and ensure a smooth payment process.
+
+## Credits
+This project drew inspiration from [Eventbrite](https://www.eventbrite.com/). Eventbrite's interface served as a guiding inspiration for the development of this Event Marketplace project.

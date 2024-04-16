@@ -98,6 +98,16 @@
             </div>
         </div>
 
+        <!-- filter -->
+        <div class="flex justify-end mb-4">
+            <select class="px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none mb-10" (change)="applyFilter()" [(ngModel)]="selectedFilter">
+                <option value="ascending">Date (Ascending)</option>
+                <option value="descending">Date (Descending)</option>
+                <option value="free">Free Events</option>
+                <option value="available">Available Events</option>
+            </select>
+        </div>
+
         <!-- event cards -->
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
             <div *ngFor="let events of selectedEvents" class="border border-gray-300 bg-white rounded-lg overflow-hidden shadow-md relative">
