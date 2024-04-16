@@ -27,6 +27,10 @@ export class DashboardComponent implements OnInit {
   activeTab: string = "active";
 
   ngOnInit(): void {
+    this.fetchData();
+  }
+
+  fetchData() {
     this.eventsService.getEventsByUid().subscribe((response) => {
       this.pastEvents = response.filter(event => new Date(event.date) < new Date());
       this.activeEvents = response.filter(event => new Date(event.date) >= new Date());
@@ -46,6 +50,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl(`/event/${eventId}`);
   }
 
+  navigateToSignUpList(eventId?: string) {
+    this.router.navigateByUrl(`/signups/${eventId}`);
+  }
+
   navigateToDashboard() {
     this.router.navigateByUrl("/dashboard");
   }
@@ -56,13 +64,13 @@ export class DashboardComponent implements OnInit {
     this.eventId = eventId;
   }
 
-  async deleteClicked() {
-    await this.eventsService.deleteEvent(this.eventId).subscribe(() => {
+  deleteClicked() {
+    this.eventsService.deleteEvent(this.eventId).subscribe(() => {
       this.showOverlay = false;
       this.eventName = "";
       this.eventId = "";
+      this.fetchData();
     });
-    this.navigateToDashboard();
   }
 
   cancelClicked() {

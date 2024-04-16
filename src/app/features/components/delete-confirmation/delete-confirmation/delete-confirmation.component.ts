@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './delete-confirmation.component.css'
 })
 export class DeleteConfirmationComponent {
-  @Input() eventName: string = "";
+  @Input() subject: string = "";
   @Output() cancelClicked: EventEmitter<void> = new EventEmitter<void>();
   @Output() deleteClicked: EventEmitter<void> = new EventEmitter<void>();
 

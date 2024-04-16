@@ -64,7 +64,7 @@ export class EventsService {
     return from(promise);
   }
 
-  updateEvent(eventId: string, updatedEvent: Event): Observable<void> {
+  updateEvent(eventId: any, updatedEvent: any): Observable<void> {
     const docRef = doc(this.eventsCollection, eventId);
     const promise = setDoc(docRef, updatedEvent);
     return from(promise);

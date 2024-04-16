@@ -1,7 +1,36 @@
 <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
-    <div class="bg-white rounded-lg shadow-lg p-6 max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
-    
+    <div class="bg-white rounded-lg shadow-lg p-16 w-3/4 lg:w-1/2">
+        <div class="flex justify-center font-bold header mb-8 lg:mb-10">{{ header }}</div>
         <form [formGroup]="signupEventForm" (ngSubmit)="onSubmit(signupEventForm.value)">
+            <div class="mb-6">
+                <label class="block mb-1">Event</label>
+                <input type="text" value="{{ event?.eventName }}" disabled class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
+            </div>
+            <div class="flex mb-6">
+                <div class="flex-1 mr-2">
+                    <label class="block mb-1">First Name</label>
+                    <input type="text" id="firstName" formControlName="firstName" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
+                    @if(signupEventForm.get('firstName')?.invalid && signupEventForm.get('firstName')?.dirty){
+                        <div class="text-red-500 text-sm mt-1">
+                            @if(signupEventForm.get('firstName')?.hasError('required')){
+                                <div>First name is required</div>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="flex-1 mr-2">
+                    <label class="block mb-1">Last Name</label>
+                    <input type="text" id="lastName" formControlName="lastName" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
+                    @if(signupEventForm.get('lastName')?.invalid && signupEventForm.get('lastName')?.dirty){
+                        <div class="text-red-500 text-sm mt-1">
+                            @if(signupEventForm.get('lastName')?.hasError('required')){
+                                <div>Last name is required</div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div> 
+            
             <div class="mb-6">
                 <label class="block mb-1">Email</label>
                 <input type="email" id="email" formControlName="email" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
@@ -17,19 +46,8 @@
                     </div>
                 }
             </div>
-              
+
             <div class="mb-6">
-                <label class="block mb-1">Organization Name</label>
-                <input type="text" id="username" formControlName="username" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
-                @if(signupEventForm.get('username')?.invalid && signupEventForm.get('username')?.dirty){
-                    <div class="text-red-500 text-sm mt-1">
-                        @if(signupEventForm.get('username')?.hasError('required')){
-                            <div>Organization is required</div>
-                        }
-                    </div>
-                }
-            </div>
-            <div class="mb-8">
                 <label class="block mb-1">Contact Number</label>
                 <input type="string" id="contact" formControlName="contact" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
                 @if(signupEventForm.get('contact')?.invalid && signupEventForm.get('contact')?.dirty){
@@ -44,6 +62,24 @@
                     </div>
                 }
             </div>
+
+            @if(mode === "Update"){
+                <div class="mb-6">
+                    <label class="block mb-1">Paid</label>
+                    <select id="paid" formControlName="paid" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                    @if(signupEventForm.get('paid')?.invalid && signupEventForm.get('paid')?.dirty){
+                        <div class="text-red-500 text-sm mt-1">
+                            @if(signupEventForm.get('paid')?.hasError('required')){
+                                <div>Please select whether payment has been made</div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+
             <div class="flex justify-center">
                 <button type="button" class="bg-gray-300 hover:bg-gray-400 text-white font-semibold px-4 py-2 rounded-md mr-2" (click)="onCancel()">
                     Cancel
@@ -51,7 +87,7 @@
                 <button type="submit" [disabled]="!signupEventForm.valid" 
                     class="bg-blue-800 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-md 
                     {{ !signupEventForm.valid ? 'bg-gray-400 cursor-not-allowed' : '' }}">
-                    Sign Up
+                    {{ mode }}
                 </button>
             </div>
         </form>

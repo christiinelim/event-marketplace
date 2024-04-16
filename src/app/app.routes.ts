@@ -42,5 +42,10 @@ export const routes: Routes = [
     {
         path: 'view-event/:id',
         loadComponent: () => import('./features/components/view-event/view-event/view-event.component').then(m => m.ViewEventComponent)
+    },
+    {
+        path: 'signups/:id',
+        canActivate: [authGuard],
+        loadComponent: () => import('./features/components/signup-list/signup-list/signup-list.component').then(m => m.SignupListComponent)
     }
 ];

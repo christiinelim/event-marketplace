@@ -17,6 +17,8 @@ export class ViewEventComponent implements OnInit {
   route = inject(ActivatedRoute);
 
   event: Event | null = null;
+  mode: string = "Sign up";
+  header: string = "Book a slot!"
   displayForm: boolean = false;
 
   ngOnInit(): void {
