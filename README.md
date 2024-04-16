@@ -1,4 +1,4 @@
-# Event Marketplace SPA
+# Event Marketplace
 
 ## Project Overview
 
