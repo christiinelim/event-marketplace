@@ -1,16 +1,42 @@
 <div>
     <app-navbar-landing></app-navbar-landing>
 
+    @if (showPopup) {
+        <div class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50">
+            <div class="bg-blue-100 shadow-lg rounded-lg p-6 flex flex-col items-center justify-center w-1/2 h-1/4">
+                <div class="flex items-center justify-center mb-4">
+                    <h2 class="text-xl font-semibold text-blue-600">Sign Up Success</h2>
+                </div>
+                <p class="text-blue-600 mb-4">You have successfully signed up.</p>
+                <button class="bg-green-600 hover:bg-green-500 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline" (click)="hidePopup()">OK</button>
+            </div>
+        </div>
+    }
+    
     <div class="wrapper mx-auto py-8">
         <!-- searchbar -->
         <div class="flex items-center justify-center mb-14 sm:mb-16 lg:mb-20">
-            <div class="w-3/4">
+            <div class="searchbar">
                 <div class="h-12 sm:h-14 lg:h-16 relative rounded-full border border-gray-300 bg-white flex items-center focus-within:ring focus-within:border-blue-500">
-                    <input type="text" placeholder="Search events" class="w-full py-2 px-6 rounded-full focus:outline-none" />
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 mr-4 hover:cursor-pointer hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <input type="text" placeholder="Search events" class="w-full py-2 px-6 rounded-full focus:outline-none" [(ngModel)]="searchTerm" (keyup)="searchEvents()" />
+                    <svg (click)="searchEventBySearchTerm()" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 mr-4 hover:cursor-pointer hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.747-4.747M11 19a8 8 0 100-16 8 8 0 000 16z" />
                     </svg>
                 </div>
+
+                @if (filteredEvents.length > 0 && searchTerm != ""){
+                    <div class="absolute z-10 bg-white border border-gray-300 rounded-lg mt-2 shadow-md searchbar">
+                        <ul class="py-1">
+                            <li *ngFor="let event of filteredEvents" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" (click)="selectEvent(event)">{{ event.eventName }}</li>
+                        </ul>
+                    </div>
+                }
+
+                @if (showClearSearch) {
+                    <div class="text-gray-500 text-sm text-center underline cursor-pointer mb-10">
+                        <div (click)="resetSearch()">Reset Search</div>
+                    </div>
+                }
             </div>
         </div>
 

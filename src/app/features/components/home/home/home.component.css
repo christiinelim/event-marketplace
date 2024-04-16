@@ -6,6 +6,10 @@
     margin-right: 10px;
 }
 
+.searchbar {
+    width: 60vw;
+}
+
 /* scrollbar */
 .categories {
     overflow-y: auto;

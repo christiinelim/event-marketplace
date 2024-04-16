@@ -24,7 +24,12 @@ export class HomeComponent implements OnInit {
   performanceEvents: Event[] = [];
   holidaysEvents: Event[] = [];
   hobbiesEvents: Event[] = [];
+  filteredEvents: any[] = [];
+  searchedEvents: any[] = [];
   selected: string = "all";
+  searchTerm: string = "";
+  showPopup: boolean = false;
+  showClearSearch: boolean = false;
   
   categoryMap: { [key: string]: Event[] } = {
     'music': this.musicEvents,
@@ -35,6 +40,11 @@ export class HomeComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    const state = window.history.state;
+    if (state.showPopup) {
+      this.showPopup = state.showPopup;
+    }
+    
     this.eventsService.getEvents().subscribe((response) => {
       this.selectedEvents = response.filter(event => new Date(event.date) >= new Date());
       this.allEvents = this.selectedEvents;
@@ -55,10 +65,39 @@ export class HomeComponent implements OnInit {
 
   filterEvents(category: string) {
     if (category === "all") {
+      this.selected = category;
       this.selectedEvents = this.allEvents;
     } else {
       this.selected = category;
       this.selectedEvents = this.categoryMap[category];
     }
+  }
+
+  hidePopup() {
+    this.showPopup = false;
+  }
+
+  // autocomplete
+  searchEvents() {
+    this.filteredEvents = this.allEvents.filter(event =>
+        event.eventName.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  selectEvent(event: any) {
+    this.searchTerm = event.eventName; 
+    this.searchedEvents = this.filteredEvents
+    this.filteredEvents = [];
+  }
+
+  searchEventBySearchTerm() {
+    this.selectedEvents = this.searchedEvents;
+    this.showClearSearch = true;
+  }
+
+  resetSearch() {
+    this.showClearSearch = false;
+    this.selectedEvents = this.allEvents;
+    this.searchTerm = "";
   }
 }

@@ -94,13 +94,14 @@ export class SignupFormComponent implements OnInit {
           userId, eventName, category, image, cost, date, starttime, endtime, location, refundPolicy, synopsis, description, attendeesAllowed
         };
         this.eventsService.updateEvent(eventId, updatedEvent).subscribe(() => {
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/', { state: { showPopup: true } });
         })
       }, (error) => {
         console.error('Sign Up error:', error);
       });
     }
   }
+  
   onCancel() {
     this.cancelClicked.emit();
   }

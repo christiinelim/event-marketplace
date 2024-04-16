@@ -61,12 +61,41 @@ export class SignupListComponent implements OnInit {
   }
 
   deleteClicked() {
-    this.showOverlay = false;
+    const userId = this.event?.userId || "";
+    const eventName = this.event?.eventName || "";
+    const category = this.event?.category || "";
+    const image = this.event?.image || "";
+    const cost = this.event?.cost || 0;
+    const date = this.event?.date || "";
+    const starttime = this.event?.starttime || "";
+    const endtime = this.event?.endtime || "";
+    const location = this.event?.location || "";
+    const refundPolicy = this.event?.refundPolicy || "";
+    const synopsis = this.event?.synopsis || "";
+    const description = this.event?.description || "";
+    const attendeesAllowed = (this.event?.attendeesAllowed || 0) + 1;
+
     this.signupService.deleteSignup(this.signupIdToDelete).subscribe(() => {
-      this.showOverlay = false;
-      this.fetchData();
-    })
+      const updatedEvent: Event = {
+        userId, eventName, category, image, cost, date, starttime, endtime, location, refundPolicy, synopsis, description, attendeesAllowed
+      };
+      this.eventsService.updateEvent(this.eventId, updatedEvent).subscribe(() => {
+        this.showOverlay = false;
+        this.fetchData();
+      })
+    }, (error) => {
+      console.error('Sign Up error:', error);
+    });
   }
+
+
+  
+
+
+
+
+
+
 
   onUpdateSuccess() {
     this.displayForm = false;
