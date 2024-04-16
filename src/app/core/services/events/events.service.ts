@@ -15,7 +15,7 @@ export class EventsService {
 
   getEvents(): Observable<Event[]> {
     return collectionData(this.eventsCollection, {
-      idField: 'id',
+      idField: 'uid',
     }) as Observable<Event[]>;
   }
 

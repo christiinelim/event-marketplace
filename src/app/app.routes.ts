@@ -3,6 +3,10 @@ import { authGuard } from './core/guards/auth/auth.guard';
 
 export const routes: Routes = [
     {
+        path: '',
+        loadComponent: () => import('./features/components/home/home/home.component').then(m => m.HomeComponent)
+    },
+    {
         path: 'signup',
         loadComponent: () => import('./features/components/signup/signup/signup.component').then(m => m.SignupComponent)
     },
@@ -36,7 +40,7 @@ export const routes: Routes = [
         loadComponent: () => import('./features/components/profile/profile/profile.component').then(m => m.ProfileComponent)
     },
     {
-        path: '',
-        loadComponent: () => import('./features/components/home/home/home.component').then(m => m.HomeComponent)
+        path: 'view-event/:id',
+        loadComponent: () => import('./features/components/view-event/view-event/view-event.component').then(m => m.ViewEventComponent)
     }
 ];

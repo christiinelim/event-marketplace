@@ -26,6 +26,6 @@ export class HomeComponent implements OnInit {
   }
 
   navigateToEventDetails(eventId?: string) {
-    this.router.navigateByUrl(`/event/${eventId}`);
+    this.router.navigateByUrl(`/view-event/${eventId}`);
   }
 }

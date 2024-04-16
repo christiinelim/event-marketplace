@@ -1,0 +1,47 @@
+<div>
+    <app-navbar-landing></app-navbar-landing>
+  
+    <div class="fixed top-1/2 transform -translate-y-1/2 right-20 sm:w-80 w-60 h-40 bg-white rounded-lg flex flex-col justify-center items-center z-50 border border-gray-200 gap-6">
+        <div class="flex flex-col items-center">
+            <span class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-600 mb-8">{{ event?.cost === 0 ? 'Free' : '$' + event?.cost }}</span>
+            <div class="w-40 sm:w-60 h-12 bg-red-500 text-white flex justify-center items-center rounded-md cursor-pointer hover:bg-red-600">
+                <button [disabled]="event?.attendeesAllowed === 0" class="w-full h-full" (click)="onSignUp()">Sign Up</button>
+            </div>
+        </div>
+    </div>    
+    
+    <div class="container mx-auto py-8">
+        <img src="{{ event?.image }}" alt="{{ event?.eventName }}" class="w-full h-80 md:h-150 object-cover object-center mb-14">
+        
+        <div class="wrapper">
+            <h1 class="header font-bold anchor">{{ event?.eventName }}</h1>
+        
+            <div class="grid gap-6">
+                <div class="col-span-12">
+                <h2 class="subheading font-bold mb-2">Location</h2>
+                <p class="text-gray-600 mb-14">{{ event?.location }}</p>
+        
+                <h2 class="subheading font-bold mb-2">Date</h2>
+                <p class="text-gray-600 mb-14">{{ event?.date }}</p>
+        
+                <h2 class="subheading font-bold mb-2">Time</h2>
+                <p class="text-gray-600 mb-14">{{ event?.starttime }} to {{ event?.endtime }}</p>
+
+                <h2 class="subheading font-bold mb-2">Category</h2>
+                <p class="text-gray-600 mb-14 capitalize">{{ event?.category }}</p>
+        
+                <h2 class="subheading font-bold mb-2">Slots Left</h2>
+                <p class="text-gray-600 mb-14">{{ event?.attendeesAllowed }}</p>
+
+                <h2 class="subheading font-bold mb-2">Description</h2>
+                <p class="text-gray-600 mb-14">{{ event?.description }}</p>
+        
+                <h2 class="subheading font-bold mb-2">Synopsis</h2>
+                <p class="text-gray-600 mb-14">{{ event?.synopsis }}</p>
+        
+                <h2 class="subheading font-bold mb-2">Refund Policy</h2>
+                <p class="text-gray-600 mb-14">{{ event?.refundPolicy }}</p>
+            </div>
+        </div>
+    </div>
+</div>
