@@ -1,26 +1,26 @@
-<nav class="bg-blue-800 py-4 px-6">
-    <div class="mx-auto flex justify-between items-center">
-      <div class="text-white font-bold logo">
-        <a href="/dashboard">Event Marketplace</a>
-      </div>
-  
-      <div class="flex items-center space-x-4">
-        <a class="text-white hover:cursor-pointer mr-6" (click)="navigateToDashboard()">Dashboard</a>
-        
-        <div class="relative">
-            <button class="text-white hover:underline cursor-pointer" (click)="toggleProfileMenu()">
-                <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white fill-current" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                </svg>
-            </button>
-            @if (isProfileOpen) {
-                <div class="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-md">
-                    <button class="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-center" (click)="navigateToProfile()">Profile</button>
-                    <button class="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-center" (click)="onLogout()">Logout</button>
-                </div>
-            }
-        </div>
+<nav class="bg-blue-800 py-4 px-6 h-16 sm:h-20">
+  <div class="mx-auto flex justify-between items-center">
+    <div class="text-white font-bold logo">
+      <a href="/dashboard">Event Marketplace</a>
+    </div>
+
+    <div class="flex items-center space-x-4">
+      <a class="text-white hover:cursor-pointer mr-6" (click)="navigateToDashboard()">Dashboard</a>
+      
+      <div class="relative">
+          <button class="text-white hover:underline cursor-pointer" (click)="toggleProfileMenu()">
+              <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white fill-current" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+              </svg>
+          </button>
+          @if (isProfileOpen) {
+              <div class="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-md">
+                  <button class="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-center" (click)="navigateToProfile()">Profile</button>
+                  <button class="block px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-center" (click)="onLogout()">Logout</button>
+              </div>
+          }
       </div>
     </div>
+  </div>
 </nav>
