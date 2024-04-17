@@ -36,6 +36,9 @@ able to perform the following functional requirements (abbreviated as FR):
 **Event Organizer Login**
 ![Login to Account](./src/assets/images/readme/login.png)
 
+**Forgot Password**
+![Forgot Password](./src/assets/images/readme/forgot.png)
+
 **Dashboard**
 ![Dashboard](./src/assets/images/readme/dashboard.png)
 
