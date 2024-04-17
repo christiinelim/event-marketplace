@@ -60,6 +60,6 @@ export class LoginComponent implements OnInit {
   }
 
   navigateToForgotPassword() {
-    this.router.navigateByUrl("/")
+    this.router.navigateByUrl("/forgot")
   }
 }

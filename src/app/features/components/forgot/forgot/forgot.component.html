@@ -1,0 +1,84 @@
+<div class="min-h-screen flex justify-center items-center login-bg">
+    <div class="overlay"></div>
+    <div class="bg-white p-8 rounded-lg shadow-md signup-form">
+        <div class="flex flex-col items-center">
+            <div class="text-blue-800 mb-6 logo">Event Marketplace</div>
+            <div class="mb-6 font-bold signup-cta">Change Password</div>
+        </div>
+        @if(error){
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mb-3 rounded relative" role="alert">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 fill-current mr-2" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM9 5a1 1 0 0 1 2 0v5a1 1 0 1 1-2 0V5zm0 10a1 1 0 1 1 2 0 1 1 0 0 1-2 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div>{{errorMessage}}</div>
+                    </div>
+                </div>
+            </div>
+        }
+        <form [formGroup]="passwordUpdateForm" (ngSubmit)="onSubmit(passwordUpdateForm.value)">
+            <div class="mb-6">
+                <label class="block mb-1">Email</label>
+                <input type="email" id="email" formControlName="email" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
+                @if(passwordUpdateForm.get('email')?.invalid && passwordUpdateForm.get('email')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(passwordUpdateForm.get('email')?.hasError('required')){
+                            <div>Email is required</div>
+                        }
+
+                        @if(passwordUpdateForm.get('email')?.hasError('email')){
+                            <div>Invalid format</div>
+                        }
+                    </div>
+                }
+            </div>
+            <div class="mb-6">
+                <label class="block mb-1">Password</label>
+                <input type="password" id="password" formControlName="password" (keyup)="checkConfirmPassword()" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
+                @if(passwordUpdateForm.get('password')?.invalid && passwordUpdateForm.get('password')?.dirty){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(passwordUpdateForm.get('password')?.hasError('required')){
+                            <div>Password is required</div>
+                        }
+
+                        @if(passwordUpdateForm.get('password')?.hasError('invalidPassword')){
+                            <div>Password needs at least 1 uppercase, 1 lowercase and 1 special character with a minimum of 8 characters</div>
+                        }
+                    </div>
+                }
+            </div>
+            <div class="mb-6">
+                <label class="block mb-1">Confirm Password</label>
+                <input type="password" id="confirmPassword" formControlName="confirmPassword" (keyup)="checkConfirmPassword()" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500">
+                @if((passwordUpdateForm.get('confirmPassword')?.invalid && passwordUpdateForm.get('confirmPassword')?.dirty) || (confirmPasswordInvalid === true)){
+                    <div class="text-red-500 text-sm mt-1">
+                        @if(passwordUpdateForm.get('confirmPassword')?.hasError('required')){
+                            <div>Input is required</div>
+                        }
+
+                        @if(confirmPasswordInvalid){
+                            <div>Passwords do not match</div>
+                        }
+                    </div>
+                }
+            </div>
+            <div class="flex justify-center">
+                <button type="submit" [disabled]="!passwordUpdateForm.valid" 
+                    class="bg-blue-800 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-md 
+                    {{ !passwordUpdateForm.valid ? 'bg-gray-400 cursor-not-allowed' : '' }}">
+                    Update Password
+                </button>
+            </div>
+        </form>
+        <div class="text-center mt-4">
+            <p>
+                <span class="text-blue-800 hover:text-blue-500 cursor-pointer font-bold" (click)="navigateToLogin()">Login</span>
+                <span class="font-bold"> | </span>
+                <span class="text-blue-800 hover:text-blue-500 cursor-pointer font-bold" (click)="navigateToSignup()">Sign Up</span>
+            </p>
+        </div>
+    </div>
+</div>
