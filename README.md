@@ -71,3 +71,9 @@ Integrate Stripe payment gateway to facilitate secure and seamless transactions 
 
 ## Credits
 This project drew inspiration from [Eventbrite](https://www.eventbrite.com/). Eventbrite's interface served as a guiding inspiration for the development of this Event Marketplace project.
+
+## Work in Progress and Bugs
+Below are some work in progress and bugs.
+
+### General
+- Refactoring components to use signals

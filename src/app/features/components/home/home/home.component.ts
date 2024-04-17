@@ -105,12 +105,16 @@ export class HomeComponent implements OnInit {
 
   applyFilter() {
     if (this.selectedFilter === "ascending") {
+      this.filterEvents(this.selected);
       this.selectedEvents.sort((a, b) => (a.date > b.date ? 1 : -1)); 
     } else if (this.selectedFilter === "descending") {
+      this.filterEvents(this.selected);
       this.selectedEvents.sort((a, b) => (a.date < b.date ? 1 : -1));
     } else if (this.selectedFilter === "free") {
+      this.filterEvents(this.selected);
       this.selectedEvents = this.selectedEvents.filter(event => event.cost === 0)
     } else {
+      this.filterEvents(this.selected);
       this.selectedEvents = this.selectedEvents.filter(event => event.attendeesAllowed > 0);
     }
   }
