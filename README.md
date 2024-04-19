@@ -4,6 +4,9 @@
 
 This project aims to develop an event marketplace where organizers can share their upcoming events and users can register for it. The platform is designed to facilitate seamless interaction between event organizers and attendees. It offers a range of features aimed at enhancing the user experience and streamlining event management for organizers.
 
+## Quick Start
+- Deployed link: [Event Marketplace](https://event-marketplace.web.app/)
+
 ## Software Requirements Specifications 
 This section describes the requirements for the software project. The created software must be
 able to perform the following functional requirements (abbreviated as FR):

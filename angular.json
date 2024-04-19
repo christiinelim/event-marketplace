@@ -94,6 +94,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "event-marketplace:build:production",
+              "serveTarget": "event-marketplace:serve:production"
+            },
+            "development": {
+              "buildTarget": "event-marketplace:build:development",
+              "serveTarget": "event-marketplace:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

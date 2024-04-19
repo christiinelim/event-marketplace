@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "event-marketplace": {
+      "hosting": {
+        "event-marketplace": [
+          "event-marketplace"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "event-marketplace"
+  }
+}
